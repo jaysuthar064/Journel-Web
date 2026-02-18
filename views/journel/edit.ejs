@@ -1,0 +1,8 @@
+<h2>Edit Journel</h2>
+
+<form action="/journel/<%= journels.id %>?_method=PUT" method="post">
+    <input type="text" name="title" value="<%= journels.title %>" required>
+    <textarea name="content" required><%= journels.content %></textarea>
+    <button type="submit">Update</button>
+
+</form>

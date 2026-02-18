@@ -1,0 +1,20 @@
+<h2>Your Journel</h2>
+
+<a href="/journel/new">Create New</a>
+
+<ul>
+    <% journels.forEach(journels=>{ %>
+        <li>
+            <h3><%= journels.title %></h3>
+            <p><%= journels.content %></p>
+            <a href="/journel/<%= journels.id %>/edit"><button>Edit</button></a>
+            <form action="/journel/<%= journels.id %>?_method=DELETE" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        <% }); %>
+</ul>
+
+<a href="/logout">
+    <button class="logout">Logout</button>
+</a>
