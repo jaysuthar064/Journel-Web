@@ -41,6 +41,26 @@ app.get("/",(req,res)=>{
 const result = await db.query("SELECT current_database()");
 console.log(result.rows);
 
+await db.query(`
+CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+`);
+
+await db.query(`
+CREATE TABLE IF NOT EXISTS journels (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+`);
+
+
 app.listen(port,()=>{
     console.log(`Server is runnig on port ${port}`);
 });
