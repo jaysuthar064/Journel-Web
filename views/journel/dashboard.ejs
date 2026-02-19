@@ -1,20 +1,43 @@
-<h2>Your Journel</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
 
-<a href="/journel/new">Create New</a>
+<nav class="navbar navbar-dark bg-dark px-4">
+    <span class="navbar-brand mb-0 h1">Journal App</span>
+    <div>
+        <a href="/journel/new" class="btn btn-primary me-2">Create</a>
+        <a href="/logout" class="btn btn-danger">Logout</a>
+    </div>
+</nav>
 
-<ul>
-    <% journels.forEach(journels=>{ %>
-        <li>
-            <h3><%= journels.title %></h3>
-            <p><%= journels.content %></p>
-            <a href="/journel/<%= journels.id %>/edit"><button>Edit</button></a>
-            <form action="/journel/<%= journels.id %>?_method=DELETE" method="post">
-                <button type="submit">Delete</button>
-            </form>
-        </li>
-        <% }); %>
-</ul>
+<div class="container mt-4">
 
-<a href="/logout">
-    <button class="logout">Logout</button>
-</a>
+    <h3 class="mb-4">Your Journals</h3>
+
+    <% if (journels.length === 0) { %>
+        <div class="alert alert-info">No journals yet. Create one!</div>
+    <% } %>
+
+    <% journels.forEach(journal => { %>
+        <div class="card mb-3 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title"><%= journal.title %></h5>
+                <p class="card-text"><%= journal.content %></p>
+
+                <a href="/journel/<%= journal.id %>/edit" class="btn btn-warning btn-sm me-2">Edit</a>
+
+                <form action="/journel/<%= journal.id %>?_method=DELETE" method="POST" class="d-inline">
+                    <button class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </div>
+        </div>
+    <% }) %>
+
+</div>
+
+</body>
+</html>
