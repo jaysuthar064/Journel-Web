@@ -3,16 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/style.css">
+    <title>Journal App</title>
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+        }
+
+        .hero {
+            height: 100vh;
+        }
+
+        .btn-custom-primary {
+            background-color: #3b82f6;
+            border: none;
+        }
+
+        .btn-custom-primary:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-custom-outline {
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-custom-outline:hover {
+            background-color: white;
+            color: #1e293b;
+        }
+    </style>
 </head>
 <body>
-    <h1>Server is working</h1>
-    <a href="/register"><button>
-        Register
-    </button></a>
-    <a href="/login"><button>
-        Login
-    </button></a>
+
+<div class="container hero d-flex flex-column justify-content-center align-items-center text-center">
+
+    <h1 class="display-4 fw-bold mb-3">
+        Welcome to Journal App
+    </h1>
+
+    <p class="lead mb-4 text-light">
+        Secure. Private. Simple journaling with authentication & protected access.
+    </p>
+
+    <div class="d-flex gap-3">
+        <a href="/register" class="btn btn-custom-primary btn-lg px-4">
+            Get Started
+        </a>
+
+        <a href="/login" class="btn btn-custom-outline btn-lg px-4">
+            Login
+        </a>
+    </div>
+
+    <div class="mt-5 text-secondary small">
+        Built with Node.js, Express & PostgreSQL
+    </div>
+
+</div>
+
 </body>
 </html>
