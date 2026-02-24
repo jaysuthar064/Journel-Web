@@ -27,6 +27,10 @@ router.get("/journel/:id/edit",ensureAuth,async(req,res)=>{
     }
 });
 
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ status: "Server is alive 🚀" });
+});
+
 router.post("/journel/new",ensureAuth,async(req,res)=>{
     const {title,content}= req.body;
     try{
