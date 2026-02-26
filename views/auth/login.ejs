@@ -1,20 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url("/img/cover-login.png") no-repeat center center;
+            background-size: cover;
+            min-height: 100vh;
+        }
+
+        .login-form {
+            display: grid;
+            place-content: center;
+            text-align: center;
+            color: #EDF2F8;
+            height: 80vh;
+        }
+    </style>
 </head>
+
 <body>
-    <h2>Login</h2>
-
-
-    <form action="/login" method="post">
-    <input type="email" name="email" placeholder="Enter email" required>
-    <input type="password" name="password" placeholder="Enter password" required>
-    <button type="submit">Login</button>
-</form>
+    <div class="login-form">
+        <h2>Login</h2>
+        <form action="/login" method="post">
+            <label>Enter Email :</label><br>
+            <input type="email" name="email" required style="width: 100%;opacity: 50%;"><br>
+            <label>Enter Password :</label><br>
+            <input type="password" name="password" required style="width: 100%;opacity: 50%;"><br>
+            <p>If not register,then sign up...</p>
+            <div class="login-btn">
+                <button type="submit" style="border-radius: 30%;background-color: wheat;color: black;">Login</button>
+                <a href="/register"><button type="button" style="border-radius: 10px;background-color:cadetblue;">SignUp</button></a>
+            </div>
+        </form>
+    </div>
 </body>
+
 </html>
