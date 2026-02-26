@@ -10,6 +10,10 @@
 body {
     background-color: #f4f6f9;
     padding: 20px;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/img/cover-login.webp") no-repeat center center;
+    background-size: cover;
+     min-height: 100vh;
 }
 
 /* Navbar */
@@ -86,17 +90,10 @@ textarea {
     background-color: #dc2626;
 }
 
- body {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                url("/img/cover-login.webp") no-repeat center center;
-            background-size: cover;
-            min-height: 100vh;
-        }
-
-        .login-form {
-            display: grid;
-            place-content: center;
-            text-align: center;
-            color: #EDF2F8;
-            height: 80vh;
-        }
+.login-form {
+display: grid;
+place-content: center;
+text-align: center;
+color: #EDF2F8;
+height: 80vh;
+}
