@@ -12,7 +12,7 @@
 <body class="landing-body">
 
     <!-- Navbar -->
-    <nav class="landing-nav">
+    <nav class="landing-nav" id="navbar">
         <a href="/" class="logo">Journal App</a>
         <div class="nav-links">
             <a href="/login" class="nav-btn nav-btn-ghost">Log in</a>
@@ -22,42 +22,42 @@
 
     <!-- Hero -->
     <section class="hero">
-        <p class="hero-eyebrow">Your private journal</p>
-        <h1>Write freely. <br>Reflect <em>deeply.</em></h1>
-        <p class="hero-desc">
+        <p class="hero-eyebrow" data-anim="fade-up">Your private journal</p>
+        <h1 data-anim="fade-up">Write freely. <br>Reflect <em>deeply.</em></h1>
+        <p class="hero-desc" data-anim="fade-up">
             A minimal, distraction-free journal built for people who value
             privacy and clarity. No noise — just your thoughts.
         </p>
-        <div class="hero-cta">
+        <div class="hero-cta" data-anim="fade-up">
             <a href="/register" class="cta-primary">
                 Start Writing <i class="bi bi-arrow-right"></i>
             </a>
             <a href="/login" class="cta-secondary">I have an account</a>
         </div>
-        <p class="hero-note">Free forever &bull; No credit card required</p>
+        <p class="hero-note" data-anim="fade-up">Free forever &bull; No credit card required</p>
     </section>
 
-    <div class="divider"></div>
+    <div class="divider" data-anim="scale-x"></div>
 
     <!-- Principles -->
     <section class="principles">
         <div class="principles-header">
-            <h2>Built around what matters</h2>
-            <p>Three things we believe every journal should have.</p>
+            <h2 data-anim="fade-up">Built around what matters</h2>
+            <p data-anim="fade-up">Three things we believe every journal should have.</p>
         </div>
         <div class="principles-grid">
-            <div class="principle">
+            <div class="principle" data-anim="fade-up-stagger">
                 <div class="principle-number">01</div>
                 <h3>Privacy First</h3>
                 <p>Your entries are yours alone. Protected by bcrypt encryption and session-based authentication.</p>
             </div>
-            <div class="principle">
+            <div class="principle" data-anim="fade-up-stagger">
                 <div class="principle-number">02</div>
                 <h3>Distraction Free</h3>
                 <p>No clutter, no social feeds. Just a clean canvas for your thoughts — designed to keep you focused.
                 </p>
             </div>
-            <div class="principle">
+            <div class="principle" data-anim="fade-up-stagger">
                 <div class="principle-number">03</div>
                 <h3>Always Available</h3>
                 <p>Access your journal from any device, any browser. Write at your desk or on the go.</p>
@@ -68,23 +68,26 @@
     <!-- Dark CTA -->
     <section class="showcase">
         <div class="showcase-inner">
-            <h2>Your story deserves a beautiful home</h2>
-            <p>
+            <h2 data-anim="fade-up">Your story deserves a beautiful home</h2>
+            <p data-anim="fade-up">
                 Whether it's daily reflections, project notes, or personal growth tracking —
                 JournalApp gives your words the space they deserve.
             </p>
-            <a href="/register" class="cta-light">
+            <a href="/register" class="cta-light" data-anim="fade-up">
                 Create Your Journal <i class="bi bi-arrow-right"></i>
             </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="landing-footer">
+    <footer class="landing-footer" data-anim="fade-in">
         <p>Journal App</p>
         <small>Crafted with Node.js, Express & PostgreSQL &bull; &copy; <%= new Date().getFullYear() %> Jayanti</small>
     </footer>
 
+    <!-- Anime.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+    <script src="/js/landing.js"></script>
 </body>
 
 </html>
