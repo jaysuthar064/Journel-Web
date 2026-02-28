@@ -1,18 +1,38 @@
 /* ── Shared Auth Page Styles (Login & Register) ── */
 
+/* Login form container - responsive & centered */
+.login-form {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"],
+.login-form input[type="text"] {
+    margin-bottom: 12px;
+}
+
+/* Password container + eye icon fix */
 .password-container {
     position: relative;
     width: 100%;
 }
 
+.password-container input {
+    padding-right: 45px !important;
+    margin-bottom: 12px !important;
+}
+
 .toggle-password {
     position: absolute;
-    right: 15px;
+    right: 10px;
     top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
+    transform: translateY(-65%);
+    background: transparent !important;
     border: none;
-    color: #64748b;
+    color: #94a3b8;
     cursor: pointer;
     padding: 5px;
     z-index: 5;
@@ -20,32 +40,53 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1;
 }
 
 .toggle-password:hover {
-    color: #1e293b;
-    background: transparent;
+    color: #e2e8f0;
+    background: transparent !important;
 }
 
 .toggle-password:focus {
     outline: none;
+    box-shadow: none;
 }
 
-/* Button hover animations */
+/* Button row - flex with gap, never overlap */
+.login-btn {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+}
+
 .login-btn button {
     transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out, background-color 0.15s ease-in-out;
     cursor: pointer;
     border: none;
-    padding: 8px 16px;
+    padding: 10px 24px;
+    font-size: 0.95rem;
+    min-width: 100px;
+    border-radius: 8px;
+    font-weight: 600;
+    margin: 0;
 }
 
 .login-btn button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
 .login-btn button:active {
     transform: translateY(0);
+}
+
+.login-btn a {
+    text-decoration: none;
 }
 
 /* Password strength (register only) */
@@ -53,8 +94,8 @@
     height: 5px;
     background: rgba(255, 255, 255, 0.5);
     border-radius: 3px;
-    margin-top: 5px;
-    margin-bottom: 20px;
+    margin-top: -8px;
+    margin-bottom: 16px;
     overflow: hidden;
     display: none;
 }
@@ -77,4 +118,26 @@
 
 .is-invalid {
     border-color: #ef4444 !important;
+}
+
+/* ── Mobile Responsive ── */
+@media (max-width: 480px) {
+    .login-form {
+        padding: 0 1rem;
+        max-width: 100%;
+    }
+
+    .login-form h2 {
+        font-size: 1.5rem;
+    }
+
+    .login-btn {
+        gap: 10px;
+    }
+
+    .login-btn button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        min-width: 90px;
+    }
 }

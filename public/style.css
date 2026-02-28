@@ -11,9 +11,9 @@ body {
     background-color: #f4f6f9;
     padding: 20px;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("/img/cover-login.webp") no-repeat center center;
+        url("/img/cover-login.webp") no-repeat center center;
     background-size: cover;
-     min-height: 100vh;
+    min-height: 100vh;
 }
 
 /* Navbar */
@@ -55,7 +55,7 @@ button:hover {
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 8px;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card h3 {
@@ -68,7 +68,8 @@ button:hover {
 }
 
 /* Forms */
-form input, form textarea {
+form input,
+form textarea {
     width: 100%;
     padding: 8px;
     margin-bottom: 12px;
@@ -91,9 +92,36 @@ textarea {
 }
 
 .login-form {
-display: grid;
-place-content: center;
-text-align: center;
-color: #EDF2F8;
-height: 80vh;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    color: #EDF2F8;
+    height: 80vh;
+}
+
+/* ── Mobile Responsive ── */
+@media (max-width: 576px) {
+    body {
+        padding: 10px;
+    }
+
+    .login-form {
+        height: auto;
+        min-height: 80vh;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .login-form h2 {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+    }
+
+    .login-form label {
+        font-size: 0.9rem;
+    }
+
+    .login-form p {
+        font-size: 0.9rem;
+    }
 }

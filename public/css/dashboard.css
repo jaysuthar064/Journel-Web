@@ -20,6 +20,8 @@ body.dashboard-body {
     align-items: center;
     border-radius: 0;
     margin-bottom: 2rem;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .dashboard-navbar .brand {
@@ -319,4 +321,66 @@ body.dashboard-body {
 .empty-state p {
     color: #64748b;
     margin-bottom: 1.5rem;
+}
+
+/* ── Mobile Responsive ── */
+@media (max-width: 576px) {
+    .dashboard-navbar {
+        padding: 0.75rem 1rem;
+    }
+
+    .dashboard-navbar .brand {
+        font-size: 1.15rem;
+        gap: 6px;
+    }
+
+    .dashboard-navbar .nav-actions {
+        gap: 8px;
+    }
+
+    .btn-modern {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+        gap: 5px;
+    }
+
+    .dashboard-container {
+        padding: 0 1rem 2rem 1rem;
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .stats-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .journals-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .journal-card-header {
+        padding: 1rem 1rem 0.75rem 1rem;
+    }
+
+    .journal-card-body {
+        padding: 1rem;
+    }
+
+    .journal-card-footer {
+        padding: 0.75rem 1rem;
+    }
+
+    .empty-state {
+        padding: 2.5rem 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .journals-grid {
+        grid-template-columns: 1fr;
+    }
 }
