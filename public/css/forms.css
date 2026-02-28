@@ -1,0 +1,54 @@
+/* ── Shared Form Styles (Create & Edit) ── */
+
+.form-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2.5rem;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #334155;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    padding: 0.75rem 1rem;
+    transition: all 0.2s;
+}
+
+.form-control:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.form-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+/* Edit page focus ring override */
+.edit-form .form-control:focus {
+    border-color: #eab308;
+    box-shadow: 0 0 0 4px rgba(234, 179, 8, 0.1);
+}
+
+/* Warning button for edit */
+.btn-modern-warning {
+    background-color: #eab308;
+    color: white;
+    box-shadow: 0 2px 4px rgba(234, 179, 8, 0.2);
+}
+
+.btn-modern-warning:hover {
+    background-color: #ca8a04;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(234, 179, 8, 0.3);
+}

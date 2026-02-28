@@ -1,45 +1,123 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Journal App</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Base styles and specific dashboard styles -->
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
 </head>
-<body class="bg-light">
 
-<nav class="navbar navbar-dark bg-dark px-4">
-    <span class="navbar-brand mb-0 h1">Journal App</span>
-    <div>
-        <a href="/journel/new" class="btn btn-primary me-2">Create</a>
-        <a href="/logout" class="btn btn-danger">Logout</a>
-    </div>
-</nav>
+<body class="dashboard-body">
 
-<div class="container mt-4">
+    <nav class="dashboard-navbar">
+        <div class="brand">
+            <i class="bi bi-journal-text" style="color: #3b82f6;"></i>
+            <span>JournalApp</span>
+        </div>
+        <div class="nav-actions">
+            <a href="/journel/new" class="btn-modern btn-modern-primary">
+                <i class="bi bi-pencil-square"></i> New Entry
+            </a>
+            <a href="/logout" class="btn-modern btn-modern-ghost" title="Logout">
+                <i class="bi bi-box-arrow-right"></i>
+            </a>
+        </div>
+    </nav>
 
-    <h3 class="mb-4">Your Journals</h3>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Overview</h1>
+        </div>
 
-    <% if (journels.length === 0) { %>
-        <div class="alert alert-info">No journals yet. Create one!</div>
-    <% } %>
-
-    <% journels.forEach(journal => { %>
-        <div class="card mb-3 shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title"><%= journal.title %></h5>
-                <p class="card-text"><%= journal.content %></p>
-
-                <a href="/journel/<%= journal.id %>/edit" class="btn btn-warning btn-sm me-2">Edit</a>
-
-                <form action="/journel/<%= journal.id %>?_method=DELETE" method="POST" class="d-inline">
-                    <button class="btn btn-danger btn-sm">Delete</button>
-                </form>
+        <!-- Stats Banner -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="bi bi-journals"></i></div>
+                <div class="stat-details">
+                    <h4>Total Journals</h4>
+                    <p>
+                        <%= journels.length %>
+                    </p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #f0fdf4; color: #16a34a;"><i class="bi bi-activity"></i></div>
+                <div class="stat-details">
+                    <h4>Activity</h4>
+                    <p>Active</p>
+                </div>
             </div>
         </div>
-    <% }) %>
 
-</div>
+        <div class="dashboard-header">
+            <h2 style="font-size: 1.5rem; font-weight: 600; color: #0f172a; margin: 0;">Your Entries</h2>
+        </div>
+
+        <% if (journels.length===0) { %>
+            <!-- Modern Empty State -->
+            <div class="empty-state">
+                <div class="empty-state-icon">
+                    <i class="bi bi-journal-x"></i>
+                </div>
+                <h3>No journals found</h3>
+                <p>Get started by wrapping your thoughts into your first journal entry.</p>
+                <a href="/journel/new" class="btn-modern btn-modern-primary">
+                    <i class="bi bi-plus-lg"></i> Create First Journal
+                </a>
+            </div>
+            <% } else { %>
+                <!-- Render Journals Grid -->
+                <div class="journals-grid">
+                    <% journels.forEach(journal=> { %>
+                        <div class="journal-card">
+                            <div class="journal-card-header">
+                                <h3 class="journal-card-title">
+                                    <%= journal.title %>
+                                </h3>
+                            </div>
+
+                            <div class="journal-card-body">
+                                <p class="journal-card-preview">
+                                    <%= journal.content %>
+                                </p>
+                            </div>
+
+                            <div class="journal-card-footer">
+                                <div class="journal-card-date">
+                                    <!-- Fallback for dates depending on DB schema, assuming created_at is available or using ID -->
+                                    <i class="bi bi-clock-history"></i> Entry #<%= journal.id %>
+                                </div>
+                                <div class="journal-card-actions">
+                                    <a href="/journel/<%= journal.id %>/edit" class="action-btn edit-btn"
+                                        title="Edit Journal">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form action="/journel/<%= journal.id %>?_method=DELETE" method="POST"
+                                        class="m-0 p-0"
+                                        onsubmit="return confirm('Are you sure you want to delete this journal?');">
+                                        <button type="submit" class="action-btn delete-btn" title="Delete Journal">
+                                            <i class="bi bi-trash3"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+                <% } %>
+
+    </div>
 
 </body>
+
 </html>
 
+<!-- Footer partial inclusion -->
 <%- include('../partials/footer') %>

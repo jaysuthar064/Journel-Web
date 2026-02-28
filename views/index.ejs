@@ -1,70 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Journal App</title>
-
-    <!-- Bootstrap CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        body {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-        }
-
-        .hero {
-            height: 100vh;
-        }
-
-        .btn-custom-primary {
-            background-color: #3b82f6;
-            border: none;
-        }
-
-        .btn-custom-primary:hover {
-            background-color: #2563eb;
-        }
-
-        .btn-custom-outline {
-            border: 2px solid white;
-            color: white;
-        }
-
-        .btn-custom-outline:hover {
-            background-color: white;
-            color: #1e293b;
-        }
-    </style>
+    <title>JournalApp — A Private Space for Your Thoughts</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/landing.css">
 </head>
-<body>
 
-<div class="container hero d-flex flex-column justify-content-center align-items-center text-center">
+<body class="landing-body">
 
-    <h1 class="display-4 fw-bold mb-3">
-        Welcome to Journal App
-    </h1>
+    <!-- Navbar -->
+    <nav class="landing-nav">
+        <a href="/" class="logo">JournalApp</a>
+        <div class="nav-links">
+            <a href="/login" class="nav-btn nav-btn-ghost">Log in</a>
+            <a href="/register" class="nav-btn nav-btn-dark">Get Started</a>
+        </div>
+    </nav>
 
-    <p class="lead mb-4 text-light">
-        Secure. Private. Simple journaling with authentication & protected access.
-    </p>
+    <!-- Hero -->
+    <section class="hero">
+        <p class="hero-eyebrow">Your private journal</p>
+        <h1>Write freely. <br>Reflect <em>deeply.</em></h1>
+        <p class="hero-desc">
+            A minimal, distraction-free journal built for people who value
+            privacy and clarity. No noise — just your thoughts.
+        </p>
+        <div class="hero-cta">
+            <a href="/register" class="cta-primary">
+                Start Writing <i class="bi bi-arrow-right"></i>
+            </a>
+            <a href="/login" class="cta-secondary">I have an account</a>
+        </div>
+        <p class="hero-note">Free forever &bull; No credit card required</p>
+    </section>
 
-    <div class="d-flex gap-3">
-        <a href="/register" class="btn btn-custom-primary btn-lg px-4">
-            Get Started
-        </a>
+    <div class="divider"></div>
 
-        <a href="/login" class="btn btn-custom-outline btn-lg px-4">
-            Login
-        </a>
-    </div>
+    <!-- Principles -->
+    <section class="principles">
+        <div class="principles-header">
+            <h2>Built around what matters</h2>
+            <p>Three things we believe every journal should have.</p>
+        </div>
+        <div class="principles-grid">
+            <div class="principle">
+                <div class="principle-number">01</div>
+                <h3>Privacy First</h3>
+                <p>Your entries are yours alone. Protected by bcrypt encryption and session-based authentication.</p>
+            </div>
+            <div class="principle">
+                <div class="principle-number">02</div>
+                <h3>Distraction Free</h3>
+                <p>No clutter, no social feeds. Just a clean canvas for your thoughts — designed to keep you focused.
+                </p>
+            </div>
+            <div class="principle">
+                <div class="principle-number">03</div>
+                <h3>Always Available</h3>
+                <p>Access your journal from any device, any browser. Write at your desk or on the go.</p>
+            </div>
+        </div>
+    </section>
 
-    <div class="mt-5 text-secondary small">
-        Built with Node.js, Express & PostgreSQL
-    </div>
+    <!-- Dark CTA -->
+    <section class="showcase">
+        <div class="showcase-inner">
+            <h2>Your story deserves a beautiful home</h2>
+            <p>
+                Whether it's daily reflections, project notes, or personal growth tracking —
+                JournalApp gives your words the space they deserve.
+            </p>
+            <a href="/register" class="cta-light">
+                Create Your Journal <i class="bi bi-arrow-right"></i>
+            </a>
+        </div>
+    </section>
 
-</div>
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <p>JournalApp</p>
+        <small>Crafted with Node.js, Express & PostgreSQL &bull; &copy; <%= new Date().getFullYear() %> Jayanti</small>
+    </footer>
 
 </body>
+
 </html>
