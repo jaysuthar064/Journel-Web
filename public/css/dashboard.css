@@ -609,4 +609,143 @@ body.dashboard-body {
         height: 30px;
         font-size: 0.8rem;
     }
+
+    .journal-modal {
+        margin: 0.5rem;
+        max-height: 90vh;
+        border-radius: 12px;
+    }
+
+    .journal-modal-title {
+        font-size: 1.2rem;
+    }
+
+    .journal-modal-body p {
+        font-size: 0.9rem;
+    }
+}
+
+/* ── Clickable Cards ── */
+.journal-card-clickable {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.journal-card-clickable:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Journal Detail Modal ── */
+.journal-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.journal-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.journal-modal {
+    background: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 640px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    transform: translateY(20px) scale(0.95);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.journal-modal-overlay.active .journal-modal {
+    transform: translateY(0) scale(1);
+}
+
+.journal-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1.5rem 1.5rem 0.75rem;
+    gap: 1rem;
+}
+
+.journal-modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.journal-modal-close {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 8px;
+    background: #f1f5f9;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.journal-modal-close:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+.journal-modal-meta {
+    padding: 0 1.5rem 0.75rem;
+    color: #64748b;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.journal-modal-meta i {
+    color: #3b82f6;
+}
+
+.journal-modal-body {
+    padding: 0 1.5rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.journal-modal-body p {
+    color: #334155;
+    font-size: 1rem;
+    line-height: 1.75;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0;
+}
+
+.journal-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid #f1f5f9;
 }

@@ -120,7 +120,10 @@
                 <!-- Render Journals Grid -->
                 <div class="journals-grid">
                     <% journels.forEach(journal=> { %>
-                        <div class="journal-card">
+                        <div class="journal-card journal-card-clickable" data-title="<%= journal.title %>"
+                            data-content="<%= journal.content %>"
+                            data-date="<%= journal.created_at ? new Date(journal.created_at).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : '' %>"
+                            data-id="<%= journal.id %>">
                             <div class="journal-card-header">
                                 <h3 class="journal-card-title">
                                     <%= journal.title %>
@@ -155,6 +158,28 @@
                 </div>
                 <% } %>
 
+                    <!-- Journal Detail Modal -->
+                    <div class="journal-modal-overlay" id="journalModal">
+                        <div class="journal-modal">
+                            <div class="journal-modal-header">
+                                <h2 class="journal-modal-title" id="modalTitle"></h2>
+                                <button class="journal-modal-close" id="modalClose" title="Close">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
+                            </div>
+                            <div class="journal-modal-meta" id="modalMeta"></div>
+                            <div class="journal-modal-body">
+                                <p id="modalContent"></p>
+                            </div>
+                            <div class="journal-modal-footer">
+                                <a href="#" class="btn-modern btn-modern-primary" id="modalEditBtn">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                                <button class="btn-modern btn-modern-ghost" id="modalCloseBtn">Close</button>
+                            </div>
+                        </div>
+                    </div>
+
     </div>
 
 </body>
@@ -171,6 +196,46 @@
             profileSection.style.display = 'none';
             profileToggle.classList.remove('active');
         }
+    });
+
+    // Journal detail modal
+    const modal = document.getElementById('journalModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+    const modalMeta = document.getElementById('modalMeta');
+    const modalEditBtn = document.getElementById('modalEditBtn');
+
+    // Open modal on card click
+    document.querySelectorAll('.journal-card-clickable').forEach(card => {
+        card.addEventListener('click', (e) => {
+            // Don't open modal if clicking edit/delete buttons
+            if (e.target.closest('.journal-card-actions')) return;
+
+            modalTitle.textContent = card.dataset.title;
+            modalContent.textContent = card.dataset.content;
+            modalMeta.innerHTML = card.dataset.date
+                ? '<i class="bi bi-calendar3"></i> ' + card.dataset.date
+                : '';
+            modalEditBtn.href = '/journel/' + card.dataset.id + '/edit';
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    // Close modal
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
     });
 </script>
 <script src="/js/loader.js"></script>
