@@ -31,11 +31,49 @@
             <a href="/journel/new" class="btn-modern btn-modern-primary">
                 <i class="bi bi-pencil-square"></i> New Entry
             </a>
+            <a href="javascript:void(0)" class="btn-modern btn-modern-ghost" id="profileToggle" title="My Profile">
+                <i class="bi bi-person-circle"></i>
+            </a>
             <a href="/logout" class="btn-modern btn-modern-ghost" title="Logout">
                 <i class="bi bi-box-arrow-right"></i>
             </a>
         </div>
     </nav>
+
+    <!-- Profile Section (hidden by default) -->
+    <div class="profile-section" id="profileSection" style="display: none;">
+        <div class="dashboard-container">
+            <div class="profile-card">
+                <div class="profile-avatar">
+                    <span>
+                        <%= currentUser.name ? currentUser.name.charAt(0).toUpperCase() :
+                            currentUser.email.charAt(0).toUpperCase() %>
+                    </span>
+                </div>
+                <div class="profile-info">
+                    <h2 class="profile-name">
+                        <%= currentUser.name || 'Journal Writer' %>
+                    </h2>
+                    <p class="profile-email"><i class="bi bi-envelope"></i>
+                        <%= currentUser.email %>
+                    </p>
+                    <div class="profile-meta">
+                        <span class="profile-meta-item">
+                            <i class="bi bi-calendar3"></i>
+                            Joined <%= currentUser.created_at ? new
+                                Date(currentUser.created_at).toLocaleDateString('en-US', { month: 'long' ,
+                                year: 'numeric' }) : 'Recently' %>
+                        </span>
+                        <span class="profile-meta-item">
+                            <i class="bi bi-journal-text"></i>
+                            <%= journels.length %>
+                                <%= journels.length===1 ? 'Entry' : 'Entries' %>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="dashboard-container">
         <div class="dashboard-header">
@@ -104,7 +142,7 @@
                                         <i class="bi bi-pencil"></i>
                                     </a>
                                     <form action="/journel/<%= journal.id %>?_method=DELETE" method="POST"
-                                        class="m-0 p-0"
+                                        style="display: inline; margin: 0; padding: 0;"
                                         onsubmit="return confirm('Are you sure you want to delete this journal?');">
                                         <button type="submit" class="action-btn delete-btn" title="Delete Journal">
                                             <i class="bi bi-trash3"></i>
@@ -121,6 +159,20 @@
 
 </body>
 
+<script>
+    // Profile toggle
+    const profileToggle = document.getElementById('profileToggle');
+    const profileSection = document.getElementById('profileSection');
+    profileToggle.addEventListener('click', () => {
+        if (profileSection.style.display === 'none') {
+            profileSection.style.display = 'block';
+            profileToggle.classList.add('active');
+        } else {
+            profileSection.style.display = 'none';
+            profileToggle.classList.remove('active');
+        }
+    });
+</script>
 <script src="/js/loader.js"></script>
 
 </html>

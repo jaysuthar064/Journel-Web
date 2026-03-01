@@ -23,7 +23,8 @@ router.get("/dashboard", ensureAuth, async (req, res) => {
         [req.user.id]
     );
     res.render("journel/dashboard", {
-        journels: result.rows
+        journels: result.rows,
+        currentUser: req.user
     });
 });
 
@@ -34,21 +35,23 @@ router.get("/logout", (req, res) => {
 })
 
 router.post("/register", async (req, res) => {
+    const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
     const confirmPassword = req.body.confirmPassword;
     try {
         if (password !== confirmPassword) {
-            return res.send("Retype Password");
+            return res.render("auth/register.ejs", { error: "Passwords do not match." });
         }
         const hashPassword = await bcrypt.hash(password, 10);
-        await db.query("INSERT INTO users(email,password) VALUES($1,$2);", [email, hashPassword]);
+        await db.query("INSERT INTO users(name,email,password) VALUES($1,$2,$3);", [name, email, hashPassword]);
         res.redirect("/login?registered=true");
     } catch (err) {
         if (err.code === "23505") {
-            res.send(`This email already exists,Registration failed`);
+            return res.render("auth/register.ejs", { error: "This email is already registered." });
         }
         console.log(err);
+        res.render("auth/register.ejs", { error: "Registration failed. Please try again." });
     }
 });
 

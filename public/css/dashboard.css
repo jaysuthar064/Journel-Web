@@ -40,6 +40,11 @@ body.dashboard-body {
     align-items: center;
 }
 
+.dashboard-navbar .nav-actions button.btn-modern {
+    line-height: 1;
+    vertical-align: middle;
+}
+
 /* Modern Buttons Override */
 .btn-modern {
     padding: 0.5rem 1.2rem;
@@ -379,8 +384,229 @@ body.dashboard-body {
     }
 }
 
+/* ── Profile Section ── */
+.profile-section {
+    background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
+    border-bottom: 1px solid #dbeafe;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+}
+
+.profile-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.profile-avatar span {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.25rem 0;
+}
+
+.profile-email {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin: 0 0 0.75rem 0;
+}
+
+.profile-email i {
+    margin-right: 0.35rem;
+    font-size: 0.8rem;
+}
+
+.profile-meta {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.profile-meta-item {
+    font-size: 0.85rem;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.profile-meta-item i {
+    color: #3b82f6;
+    font-size: 0.85rem;
+}
+
+#profileToggle.active {
+    background: #eff6ff;
+    color: #3b82f6;
+}
+
+/* ── Action Buttons (Edit / Delete) ── */
+.journal-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.action-btn.edit-btn {
+    background: #eff6ff;
+    color: #3b82f6;
+}
+
+.action-btn.edit-btn:hover {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.action-btn.delete-btn {
+    background: #fef2f2;
+    color: #ef4444;
+}
+
+.action-btn.delete-btn:hover {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
 @media (max-width: 768px) {
     .journals-grid {
         grid-template-columns: 1fr;
+    }
+
+    .profile-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-meta {
+        justify-content: center;
+    }
+}
+
+/* ── Extra Small Mobile (320px) ── */
+@media (max-width: 400px) {
+    .dashboard-navbar {
+        padding: 0.6rem 0.75rem;
+        gap: 6px;
+    }
+
+    .dashboard-navbar .brand {
+        font-size: 1rem;
+        gap: 4px;
+    }
+
+    .dashboard-navbar .brand i {
+        font-size: 0.9rem;
+    }
+
+    .dashboard-navbar .nav-actions {
+        gap: 4px;
+    }
+
+    .btn-modern {
+        padding: 0.35rem 0.6rem;
+        font-size: 0.75rem;
+        gap: 3px;
+        border-radius: 6px;
+    }
+
+    .btn-modern-primary i {
+        font-size: 0.75rem;
+    }
+
+    .dashboard-container {
+        padding: 0 0.75rem 1.5rem 0.75rem;
+    }
+
+    .dashboard-header h1,
+    .dashboard-header h2 {
+        font-size: 1.2rem !important;
+    }
+
+    .stat-card {
+        padding: 0.75rem;
+    }
+
+    .profile-avatar {
+        width: 48px;
+        height: 48px;
+    }
+
+    .profile-avatar span {
+        font-size: 1.2rem;
+    }
+
+    .profile-name {
+        font-size: 1.1rem;
+    }
+
+    .profile-email {
+        font-size: 0.8rem;
+    }
+
+    .profile-meta-item {
+        font-size: 0.75rem;
+    }
+
+    .journal-card-title {
+        font-size: 1rem;
+    }
+
+    .journal-card-preview {
+        font-size: 0.85rem;
+    }
+
+    .action-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
     }
 }
