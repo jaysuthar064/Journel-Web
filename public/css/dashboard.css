@@ -623,6 +623,9 @@ body.dashboard-body {
     .journal-modal-body p {
         font-size: 0.9rem;
     }
+    #clearSearch{
+        opacity: 0;
+    }
 }
 
 /* ── Clickable Cards ── */

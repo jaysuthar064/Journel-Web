@@ -12,6 +12,28 @@
     <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/loader.css">
+    <!-- Quill.js CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+    <style>
+        /* Custom Quill styling to fit the app's modern theme */
+        .ql-toolbar.ql-snow {
+            border-radius: 0.5rem 0.5rem 0 0;
+            border-color: #e2e8f0;
+            background-color: #f8fafc;
+        }
+
+        .ql-container.ql-snow {
+            border-radius: 0 0 0.5rem 0.5rem;
+            border-color: #e2e8f0;
+            min-height: 250px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+
+        .ql-editor {
+            min-height: 250px;
+        }
+    </style>
 </head>
 
 <body class="dashboard-body">
@@ -51,8 +73,10 @@
 
                 <div class="mb-4">
                     <label class="form-label">Content</label>
-                    <textarea name="content" class="form-control" rows="8" placeholder="Write your thoughts here..."
-                        required></textarea>
+                    <!-- Quill editor container -->
+                    <div id="editor-container"></div>
+                    <!-- Hidden input to store rich text HTML for form submission -->
+                    <input type="hidden" name="content" id="content-input" required>
                 </div>
 
                 <div class="d-flex gap-3 justify-content-end mt-5">
@@ -66,6 +90,49 @@
     </div>
 
 </body>
+
+<!-- Quill.js JS -->
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+<script>
+    // Initialize Quill editor
+    const quill = new Quill('#editor-container', {
+        theme: 'snow',
+        placeholder: 'Write your thoughts here...',
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                ['blockquote', 'code-block'],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                [{ 'align': [] }],
+                ['link'],
+                ['clean']                                         // remove formatting button
+            ]
+        }
+    });
+
+    // Handle form submission
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function (e) {
+        // Prevent default submission to first ensure content is populated
+        e.preventDefault();
+
+        // Populate hidden input with HTML content from Quill
+        const contentInput = document.getElementById('content-input');
+        const quillHtml = quill.getSemanticHTML();
+
+        // Add basic validation to ensure it's not empty text
+        if (quill.getText().trim().length === 0) {
+            alert('Journal content cannot be empty.');
+            return;
+        }
+
+        contentInput.value = quillHtml;
+
+        // Submit the form programmatically
+        form.submit();
+    });
+</script>
 
 <script src="/js/loader.js"></script>
 

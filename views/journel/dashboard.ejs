@@ -13,6 +13,92 @@
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="/css/loader.css">
+    <style>
+        /* Navbar Search Responsiveness */
+        .dashboard-navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: nowrap !important;
+            /* Strictly no wrapping */
+            padding: 0.8rem 1rem !important;
+            /* Thinner padding for mobile */
+            gap: 0.5rem;
+        }
+
+        .dashboard-navbar .brand {
+            flex-shrink: 0;
+            /* Never shrink brand */
+            font-size: 1.25rem !important;
+            /* Slightly smaller text for 320px fit */
+        }
+
+        .dashboard-navbar .nav-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.25rem;
+            /* Tighter gap for small screens */
+            flex-shrink: 0;
+        }
+
+        /* Smaller buttons for mobile */
+        .dashboard-navbar .btn-modern {
+            padding: 0.4rem 0.6rem !important;
+        }
+
+        @media (max-width: 576px) {
+            .navbar-search {
+                display: none !important;
+                position: absolute !important;
+                top: 100% !important;
+                left: 0 !important;
+                width: 100% !important;
+                padding: 0.5rem 1rem !important;
+                background: #f8fafc !important;
+                border-bottom: 1px solid #e2e8f0 !important;
+                z-index: 40 !important;
+                box-sizing: border-box;
+            }
+
+            .navbar-search.active {
+                display: block !important;
+            }
+
+            .dashboard-navbar .nav-actions a span {
+                display: none;
+            }
+
+            /* Show mobile search trigger icon */
+            .mobile-search-toggle {
+                display: inline-flex !important;
+            }
+
+            .mobile-close-btn {
+                display: flex !important;
+                position: absolute;
+                right: 1.5rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+
+        @media (min-width: 577px) {
+            .navbar-search {
+                flex: 0 1 500px;
+                margin: 0 1.5rem;
+                position: relative;
+            }
+
+            .mobile-search-toggle {
+                display: none !important;
+            }
+
+            .mobile-close-btn {
+                display: none !important;
+            }
+        }
+    </style>
 </head>
 
 <body class="dashboard-body">
@@ -22,20 +108,53 @@
         <p class="loader-text">Loading your journals</p>
     </div>
 
-    <nav class="dashboard-navbar">
+    <nav class="dashboard-navbar" style="position: relative; z-index: 50;">
         <div class="brand">
             <i class="bi bi-journal-text" style="color: #3b82f6;"></i>
             <span>Journal App</span>
         </div>
-        <div class="nav-actions">
-            <a href="/journel/new" class="btn-modern btn-modern-primary">
-                <i class="bi bi-pencil-square"></i> New Entry
+
+        <!-- Modern Search Bar in Navbar -->
+        <div class="search-container navbar-search">
+            <i class="bi bi-search"
+                style="position: absolute; left: 1.5rem; top: 50%; transform: translateY(-50%); z-index: 11; color: #64748b; pointer-events: none; display: flex; align-items: center;"></i>
+
+            <input type="text" id="searchInput" class="form-control" placeholder="Search entries..."
+                style="padding: 0.6rem 2.8rem; border-radius: 2rem; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); width: 100%; box-sizing: border-box; margin: 0; outline: none; background: #fff;">
+
+            <!-- Clear Button container -->
+            <div
+                style="position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); display: flex; align-items: center; z-index: 11; height: 100%;">
+                <button id="clearSearch"
+                    style="background: none; border: none; color: #94a3b8; display: none; cursor: pointer; padding: 0 0.5rem; justify-content: center; align-items: center; height: 100%;padding-bottom: 9px;">
+                    <i class="bi bi-x-circle-fill"
+                        style="display: flex; align-items: center; justify-content: center; transform: translateY(1px);"></i>
+                </button>
+            </div>
+
+            <!-- Mobile close active search button -->
+            <button id="closeMobileSearch" class="mobile-close-btn"
+                style="background: none; border: none; font-size: 1.2rem; color: #64748b; padding-left: 0.5rem; cursor: pointer; align-items: center; justify-content: center; z-index: 12;">
+                <i class="bi bi-x-lg" style="padding-bottom: 15px;"></i>
+            </button>
+        </div>
+
+        <div class="nav-actions" style="gap: 8px;">
+            <!-- Mobile Search Toggle -->
+            <button class="btn-modern btn-modern-ghost mobile-search-toggle" id="mobileSearchBtn"
+                style="display: none; padding: 0.5rem;margin-bottom: 7px;" title="Search">
+                <i class="bi bi-search" style="font-size: 1.1rem; line-height: 1;"></i>
+            </button>
+            <a href="/journel/new" class="btn-modern btn-modern-primary" style="padding: 0.5rem 1rem;">
+                <i class="bi bi-pencil-square" style="font-size: 1.1rem; line-height: 1;"></i> <span
+                    style="margin-left: 4px;">New Entry</span>
             </a>
-            <a href="javascript:void(0)" class="btn-modern btn-modern-ghost" id="profileToggle" title="My Profile">
-                <i class="bi bi-person-circle"></i>
+            <a href="javascript:void(0)" class="btn-modern btn-modern-ghost" id="profileToggle" title="My Profile"
+                style="padding: 0.5rem;">
+                <i class="bi bi-person-circle" style="font-size: 1.1rem; line-height: 1;"></i>
             </a>
-            <a href="/logout" class="btn-modern btn-modern-ghost" title="Logout">
-                <i class="bi bi-box-arrow-right"></i>
+            <a href="/logout" class="btn-modern btn-modern-ghost" title="Logout" style="padding: 0.5rem;">
+                <i class="bi bi-box-arrow-right" style="font-size: 1.1rem; line-height: 1;"></i>
             </a>
         </div>
     </nav>
@@ -100,8 +219,17 @@
             </div>
         </div>
 
-        <div class="dashboard-header">
+        <div class="dashboard-header mb-4">
             <h2 style="font-size: 1.5rem; font-weight: 600; color: #0f172a; margin: 0;">Your Entries</h2>
+        </div>
+
+        <!-- Hidden No Results State -->
+        <div id="noSearchResults" class="empty-state" style="display: none; text-align: center; padding: 4rem 2rem;">
+            <div class="empty-state-icon" style="background: #f1f5f9; color: #64748b; margin: 0 auto 1.5rem;">
+                <i class="bi bi-search"></i>
+            </div>
+            <h3 style="color: #0f172a; margin-bottom: 0.5rem;">No matches found</h3>
+            <p style="color: #64748b;">We couldn't find any journals matching your search.</p>
         </div>
 
         <% if (journels.length===0) { %>
@@ -131,9 +259,10 @@
                             </div>
 
                             <div class="journal-card-body">
-                                <p class="journal-card-preview">
-                                    <%= journal.content %>
-                                </p>
+                                <div class="journal-card-preview"
+                                    style="display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
+                                    <%- journal.content.replace(/<[^>]*>?/gm, ' ') %>
+                                </div>
                             </div>
 
                             <div class="journal-card-footer">
@@ -168,8 +297,8 @@
                                 </button>
                             </div>
                             <div class="journal-modal-meta" id="modalMeta"></div>
-                            <div class="journal-modal-body">
-                                <p id="modalContent"></p>
+                            <div class="journal-modal-body" style="font-family: 'Inter', sans-serif;">
+                                <div id="modalContent"></div>
                             </div>
                             <div class="journal-modal-footer">
                                 <a href="#" class="btn-modern btn-modern-primary" id="modalEditBtn">
@@ -185,57 +314,137 @@
 </body>
 
 <script>
-    // Profile toggle
-    const profileToggle = document.getElementById('profileToggle');
-    const profileSection = document.getElementById('profileSection');
-    profileToggle.addEventListener('click', () => {
-        if (profileSection.style.display === 'none') {
-            profileSection.style.display = 'block';
-            profileToggle.classList.add('active');
-        } else {
-            profileSection.style.display = 'none';
-            profileToggle.classList.remove('active');
+    document.addEventListener('DOMContentLoaded', () => {
+        // Profile Toggle
+        const profileToggle = document.getElementById('profileToggle');
+        const profileSection = document.getElementById('profileSection');
+
+        if (profileToggle && profileSection) {
+            profileToggle.addEventListener('click', () => {
+                const isHidden = profileSection.style.display === 'none';
+                if (isHidden) {
+                    profileSection.style.display = 'block';
+                    // Add entrance animation class if using Tailwind/Animate.css later
+                    profileSection.classList.add('fade-in');
+                } else {
+                    profileSection.style.display = 'none';
+                    profileSection.classList.remove('fade-in');
+                }
+            });
         }
-    });
 
-    // Journal detail modal
-    const modal = document.getElementById('journalModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalContent = document.getElementById('modalContent');
-    const modalMeta = document.getElementById('modalMeta');
-    const modalEditBtn = document.getElementById('modalEditBtn');
+        // Mobile Search Toggle
+        const mobileSearchBtn = document.getElementById('mobileSearchBtn');
+        const navbarSearch = document.querySelector('.navbar-search');
+        const mobileSearchInput = document.getElementById('searchInput');
+        const closeMobileSearch = document.getElementById('closeMobileSearch');
 
-    // Open modal on card click
-    document.querySelectorAll('.journal-card-clickable').forEach(card => {
-        card.addEventListener('click', (e) => {
-            // Don't open modal if clicking edit/delete buttons
-            if (e.target.closest('.journal-card-actions')) return;
+        if (mobileSearchBtn && navbarSearch) {
+            mobileSearchBtn.addEventListener('click', () => {
+                navbarSearch.classList.add('active');
+                // Adjust placeholder styles dynamically if needed, but styling takes care of most of it.
+                setTimeout(() => mobileSearchInput.focus(), 150);
+            });
+        }
 
-            modalTitle.textContent = card.dataset.title;
-            modalContent.textContent = card.dataset.content;
-            modalMeta.innerHTML = card.dataset.date
-                ? '<i class="bi bi-calendar3"></i> ' + card.dataset.date
-                : '';
-            modalEditBtn.href = '/journel/' + card.dataset.id + '/edit';
+        if (closeMobileSearch && navbarSearch) {
+            closeMobileSearch.addEventListener('click', () => {
+                navbarSearch.classList.remove('active');
+                mobileSearchInput.value = ''; // clear search
+                if (typeof filterJournals === 'function') filterJournals();
+            });
+        }
 
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+        // Search Functionality
+        const modal = document.getElementById('journalModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContent = document.getElementById('modalContent');
+        const modalMeta = document.getElementById('modalMeta');
+        const modalEditBtn = document.getElementById('modalEditBtn');
+
+        // Open modal on card click
+        document.querySelectorAll('.journal-card-clickable').forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Don't open modal if clicking edit/delete buttons
+                if (e.target.closest('.journal-card-actions')) return;
+
+                modalTitle.textContent = card.dataset.title;
+                modalContent.innerHTML = card.dataset.content;
+                modalMeta.innerHTML = card.dataset.date
+                    ? '<i class="bi bi-calendar3"></i> ' + card.dataset.date
+                    : '';
+                modalEditBtn.href = '/journel/' + card.dataset.id + '/edit';
+
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
         });
-    });
 
-    // Close modal
-    function closeModal() {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
+        // Search and Filtering Logic
+        const searchInput = document.getElementById('searchInput');
+        const clearSearch = document.getElementById('clearSearch');
+        const journalCards = document.querySelectorAll('.journal-card');
+        const noSearchResults = document.getElementById('noSearchResults');
+        const journalsGrid = document.querySelector('.journals-grid');
 
-    document.getElementById('modalClose').addEventListener('click', closeModal);
-    document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-    });
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+        function filterJournals() {
+            if (!searchInput) return;
+
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            // Toggle clear button
+            clearSearch.style.display = searchTerm.length > 0 ? 'block' : 'none';
+
+            journalCards.forEach(card => {
+                const title = card.dataset.title.toLowerCase();
+                // Create a temporary div to strip HTML tags for actual full-text search without matching HTML attributes
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = card.dataset.content;
+                const contentText = tempDiv.textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || contentText.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Show/hide no results message
+            if (visibleCount === 0 && journalCards.length > 0) {
+                if (journalsGrid) journalsGrid.style.display = 'none';
+                if (noSearchResults) noSearchResults.style.display = 'block';
+            } else {
+                if (journalsGrid) journalsGrid.style.display = 'grid'; // Uses grid defined in CSS
+                if (noSearchResults) noSearchResults.style.display = 'none';
+            }
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener('input', filterJournals);
+
+            clearSearch.addEventListener('click', () => {
+                searchInput.value = '';
+                filterJournals();
+                searchInput.focus();
+            });
+        }
+
+        // Close modal
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+        });
     });
 </script>
 <script src="/js/loader.js"></script>
