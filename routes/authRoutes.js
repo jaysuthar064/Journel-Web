@@ -28,6 +28,17 @@ router.get("/dashboard", ensureAuth, async (req, res) => {
     });
 });
 
+router.get("/profile", ensureAuth, async (req, res) => {
+    // Get count of user's journals for the profile page
+    const countResult = await db.query("SELECT COUNT(*) FROM journels WHERE user_id=$1", [req.user.id]);
+    const journalCount = parseInt(countResult.rows[0].count, 10) || 0;
+    
+    res.render("journel/profile", {
+        currentUser: req.user,
+        journalCount: journalCount
+    });
+});
+
 router.get("/logout", (req, res) => {
     req.logout(() => {
         res.redirect("/login");
