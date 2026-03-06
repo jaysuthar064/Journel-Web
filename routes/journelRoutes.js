@@ -67,4 +67,25 @@ router.delete("/journel/:id",ensureAuth,async(req,res)=>{
     }
 });
 
+// Export all journals for current user as JSON
+router.get("/journel/export", ensureAuth, async (req, res) => {
+  try {
+    const result = await db.query(
+      "SELECT id, title, content, created_at, is_pinned, is_favorite FROM journels WHERE user_id=$1 ORDER BY created_at ASC;",
+      [req.user.id]
+    );
+
+    res.setHeader(
+      "Content-Disposition",
+      'attachment; filename="journal-entries.json"'
+    );
+    res.setHeader("Content-Type", "application/json; charset=utf-8");
+
+    res.send(JSON.stringify(result.rows, null, 2));
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error exporting journals");
+  }
+});
+
 export default router;

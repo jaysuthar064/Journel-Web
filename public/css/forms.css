@@ -52,3 +52,37 @@
     transform: translateY(-1px);
     box-shadow: 0 4px 6px rgba(234, 179, 8, 0.3);
 }
+
+/* ── Mobile Responsive ── */
+@media (max-width: 576px) {
+    .form-card {
+        padding: 1.5rem 1rem;
+        border-radius: 12px;
+    }
+    
+    .form-header {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+    }
+}
+
+/* ── Extra Small Mobile (320px) ── */
+@media (max-width: 400px) {
+    .form-card {
+        padding: 1rem 0.75rem;
+        border-radius: 8px;
+    }
+    
+    .form-header h2 {
+        font-size: 1.3rem !important;
+    }
+    
+    .form-header p {
+        font-size: 0.85rem;
+    }
+    
+    .form-control {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}

@@ -382,6 +382,45 @@ body.dashboard-body {
     .empty-state {
         padding: 2.5rem 1.5rem;
     }
+
+    .nav-actions a[href="/journel/new"].btn-modern-primary {
+        display: none !important;
+    }
+}
+
+/* ── Floating Action Button (Mobile) ── */
+.mobile-fab {
+    display: none;
+}
+
+@media (max-width: 576px) {
+    .mobile-fab {
+        display: flex;
+        position: fixed;
+        bottom: 2rem;
+        right: 1.5rem;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background-color: #3b82f6;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        font-size: 1.5rem;
+        z-index: 100;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+    
+    .mobile-fab:hover {
+        background-color: #2563eb;
+        transform: translateY(-2px);
+    }
+    
+    .mobile-fab:active {
+        transform: translateY(0);
+    }
 }
 
 /* ── Profile Section ── */
