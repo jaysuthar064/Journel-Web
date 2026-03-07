@@ -15,7 +15,8 @@ router.get("/login", (req, res) => {
         return res.redirect("/dashboard")
     }
     const successMsg = req.query.registered ? "Successfully registered! Please log in." : null;
-    res.render("auth/login.ejs", { success: successMsg });
+    const errorMsg = req.query.error ? req.query.error : null;
+    res.render("auth/login.ejs", { success: successMsg, error: errorMsg });
 });
 
 router.get("/dashboard", ensureAuth, async (req, res) => {
@@ -66,11 +67,18 @@ router.post("/register", async (req, res) => {
     }
 });
 
-router.post("/login",
-    passport.authenticate("local", {
-        successRedirect: "/dashboard",
-        failureRedirect: "/login"
-    })
-);
+router.post("/login", (req, res, next) => {
+    passport.authenticate("local", (err, user, info) => {
+        if (err) { return next(err); }
+        if (!user) { 
+            const msg = info && info.message ? info.message : "Invalid email or password.";
+            return res.redirect("/login?error=" + encodeURIComponent(msg)); 
+        }
+        req.logIn(user, (err) => {
+            if (err) { return next(err); }
+            return res.redirect("/dashboard");
+        });
+    })(req, res, next);
+});
 
 export default router;

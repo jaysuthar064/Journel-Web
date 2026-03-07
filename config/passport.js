@@ -10,11 +10,11 @@ passport.use(new Strategy(
             const result= await db.query("SELECT * FROM users WHERE email=$1",[email]);
             const user=result.rows[0];
             if(result.rows.length===0){
-                done(null,false);
+                return done(null, false, { message: 'Incorrect email or password.' });
             }
             const isMatch= await bcrypt.compare(password,user.password);
             if(!isMatch){
-                return done(null,false);
+                return done(null, false, { message: 'Incorrect email or password.' });
             }
             return done(null,user);
         }catch(err){
