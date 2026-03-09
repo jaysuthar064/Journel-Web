@@ -38,39 +38,42 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-const result = await db.query("SELECT current_database()");
-console.log(result.rows);
+try {
+  const result = await db.query("SELECT current_database()");
+  console.log("Database connected:", result.rows);
 
-await db.query(`
-CREATE TABLE IF NOT EXISTS users (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(100),
-  email VARCHAR(255) UNIQUE NOT NULL,
-  password TEXT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-`);
+  await db.query(`
+  CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
+  `);
 
-// Migration: add name column if it doesn't exist (for existing databases)
-await db.query(`
-  DO $$ BEGIN
-    ALTER TABLE users ADD COLUMN IF NOT EXISTS name VARCHAR(100);
-  EXCEPTION WHEN duplicate_column THEN NULL;
-  END $$;
-`);
+  // Migration: add name column if it doesn't exist (for existing databases)
+  await db.query(`
+    DO $$ BEGIN
+      ALTER TABLE users ADD COLUMN IF NOT EXISTS name VARCHAR(100);
+    EXCEPTION WHEN duplicate_column THEN NULL;
+    END $$;
+  `);
 
-await db.query(`
-CREATE TABLE IF NOT EXISTS journels (
-  id SERIAL PRIMARY KEY,
-  title VARCHAR(255) NOT NULL,
-  content TEXT NOT NULL,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-`);
+  await db.query(`
+  CREATE TABLE IF NOT EXISTS journels (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
+  `);
 
-
-app.listen(port, () => {
-  console.log(`Server is runnig on port ${port}`);
-});
-
+  app.listen(port, "0.0.0.0", () => {
+    console.log(`Server is running on port ${port}`);
+  });
+} catch (error) {
+  console.error("Database connection or migration failed:", error);
+  process.exit(1);
+}
